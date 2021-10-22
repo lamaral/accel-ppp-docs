@@ -353,12 +353,17 @@ Section IPoE contain many flexible customization.
 
     Specifies value of Calling-Station-Id radius attribute.
 
-**proxy-arp=n**
+**proxy-arp=0|1|2**
     By default is disabled: ``proxy-arp=0``
 
     Parameter specifies whether accel-ppp should reply to arp requests. Also may defined per-interface.
     
-    * Need improve with arg 1 and 2.
+    ``0`` -  proxy-arp disabled.
+
+    ``1`` -  proxy-arp enabled. Accel send arp-reply if src ip and dst ip on different interfaces (as well as linux proxy_arp).
+
+    ``2`` -  proxy-arp enabled. Accel send arp-reply back to the same interface (as well as linux proxy_arp_pvlan).
+    
 **ip-unnumbered=0|1**
     By default is enabled: ``ip-unnumbered=1``
 
@@ -401,14 +406,6 @@ The ``relay=x.x.x.x`` parameter specifies DHCPv4 relay IP address to pass reques
 The ``giaddr=x.x.x.x`` parameter specifies relay agent IP address.
 
 The ``src=x.x.x.x`` parameter specifies ip address to use as source when adding route to client.
-
-The ``proxy-arp=0|1|2`` parameter specifies whether accel-ppp should reply to arp requests.
-
-    * ``0`` -  proxy-arp disabled.
-
-    * ``1`` -  proxy-arp enabled. Accel send arp-reply if src ip and dst ip on different interfaces (as well as linux proxy_arp).
-
-    * ``2`` -  proxy-arp enabled. Accel send arp-reply back to the same interface (as well as linux proxy_arp_pvlan).
 
 The ``username=ifname|lua:function_name`` allow set custom LUA function to form username from packet header information. Often used this param on varius BRAS connection type.
 
