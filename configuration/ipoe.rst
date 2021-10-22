@@ -404,6 +404,12 @@ The ``src=x.x.x.x`` parameter specifies ip address to use as source when adding 
 
 The ``proxy-arp=0|1|2`` parameter specifies whether accel-ppp should reply to arp requests.
 
+    * ``0`` -  proxy-arp disabled.
+
+    * ``1`` -  proxy-arp enabled. Accel send arp-reply if src ip and dst ip on different interfaces (as well as linux proxy_arp).
+
+    * ``2`` -  proxy-arp enabled. Accel send arp-reply back to the same interface (as well as linux proxy_arp_pvlan).
+
 The ``username=ifname|lua:function_name`` allow set custom LUA function to form username from packet header information. Often used this param on varius BRAS connection type.
 
 ``ipv6=0|1`` will activate support ipv6 on interface. If not defined, inherit global params.
