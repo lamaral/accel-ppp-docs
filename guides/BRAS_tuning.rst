@@ -92,16 +92,11 @@ You can adjust allowed PPPoE min/max MTU/MRU settings:
   mtu=1492
   mru=1492
 
-
-
 Hotplug optimization
 ^^^^^^^^^^^^^^^^^^^^
 To generate hotplug events on IPoE interfaces (Debian 10):
 
 ``nano /lib/udev/ifupdown-hotplug``
-
-
-
 
 .. code-block:: sh
 
@@ -111,7 +106,29 @@ To generate hotplug events on IPoE interfaces (Debian 10):
     case $INTERFACE in
         ppp*|ippp*|isdn*|plip*|lo|irda*|ipsec*
 
-
-
 just add ``|ipoe*`` after ``|ipsec*``
 
+SYSTEMD-UDEV optimizations
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+1. Delete ``99-default.link`` from ``/lib/systemd/network/`` directory
+
+.. code-block:: sh
+
+    rm /lib/systemd/network/99-default.link
+
+2. Change ``/udev/rules.d/99-systemd.rules``
+
+.. code-block:: sh
+
+    ACTION=="add", SUBSYSTEM=="net", KERNEL!="lo|ppp*|ipoe*", RUN+="/lib/systemd/systemd-sysctl --prefix=/net/ipv4/conf/$name --prefix=/net/ipv4/neigh/$name --prefix=/net/ipv6/conf/$name --prefix=/net/ipv6/neigh/$name"
+
+Add ``|ppp*|ipoe*`` to ``KERNEL!="lo"``
+
+3. Change ``/lib/udev/rules.d/80-ifupdown.rules``
+
+.. code-block:: sh
+
+    SUBSYSTEM=="net", ACTION=="add|remove", KERNEL!="ppp*|ipoe*", RUN+="ifupdown-hotplug"
+
+Add ``KERNEL!="ppp*|ipoe*"``
