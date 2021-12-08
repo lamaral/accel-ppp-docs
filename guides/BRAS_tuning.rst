@@ -14,8 +14,12 @@ Edit file ``/etc/default/grub``
 
 .. code-block:: sh
 
-  GRUB_CMDLINE_LINUX_DEFAULT="crashkernel=128M intel_idle.max_cstate=0 processor.max_cstate=1 idle=poll ixgbe.allow_unsupportd_sfp=1 quiet consoleblank=0 biosdevname=1 audit=0 noibrs noibpb nopti nospectre_v2 nospectre_v1 l1tf=off nospec_store_bypass_disable no_stf_barrier mds=off mitigations=off pcie_aspm=off"
+  GRUB_CMDLINE_LINUX_DEFAULT="intel_idle.max_cstate=0 processor.max_cstate=1 idle=poll quiet mitigations=off"
 
+Additional GRUB CMD arguments:
+
+  * ixgbe.allow_unsupportd_sfp=1 - Allow to use not original Intel SFP+ modules
+  * pcie_aspm=off - Disable Active-State Power Management
 
 After saving, please update grub settings 
 
@@ -23,7 +27,7 @@ After saving, please update grub settings
 
   $sudo update-grub
 
-Warning! Enabling the idle loop  (``idle=poll``) parameter can cause 100% CPU utilization on your VM (if you're using virtual enviroments like ProxMox)
+Warning! Enabling the idle loop  (``idle=poll``) parameter can cause 100% CPU utilization on your VM (if you're using virtual enviroments like ProxMox, VMWare, etc.)
 
 
 Disable NIC offloads
@@ -37,10 +41,9 @@ Debian ``/etc/network/interfaces``:
   
     allow-hotplug eth0
     iface eth0 inet manual
-        up ethtool -K eth0 rx off tx off tso off gso off gro off lro off rxvlan off txvlan off rx-vlan-filter off sg off rxhash off &> /dev/null
-        up ethtool -K eth0 tso off gso off gro off ntuple on &> /dev/null
+        up ethtool -K eth0 tso off gso off gro off rxvlan off txvlan off rx-vlan-filter off ntuple on &> /dev/null
         up ethtool -G eth0 rx 4096 tx 4096 &> /dev/null
-        up ifconfig eth0 txqueuelen 10000 &> /dev/null
+        up ip link set eth0 txqueuelen 10000 &> /dev/null
 
 Please determine your NIC queue and buffers limit before increase:
 
