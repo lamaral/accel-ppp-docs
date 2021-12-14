@@ -12,6 +12,9 @@
   Specified, should radius module produce verbose logging of interim radius packets.
 
 **dictionary=/path/to/dictionary**
+  By default is `< -DCMAKE_INSTALL_PREFIX >/share/accel-ppp/radius/dictionary`
+  
+  Specifies path to RADIUS dictionaries. It is possible to define multiple dictionaries
 
 **server=address,secret[,auth-port=1812][,acct-port=1813][,req-limit=0][,fail-timeout=0,max-fail=0,][,weight=1][,backup]**
   By default is not defined.
@@ -32,8 +35,6 @@
   By default is not defined.
 
   Specifies address to use as local address of ppp interfaces if *Framed-IP-Address* received from RADIUS server.
-
-**bind=x.x.x.x**
 
 **acct-interim-interval=n**
   By default is not defined.
@@ -65,21 +66,30 @@
   
   Specifies should *accel-ppp* generate and send ``Acct-Session-Id`` on Access-Request packet. By default ``Acct-Session-Id`` sent on Accounting-Request packet.
   
-**require-nas-identification=**
-
-**acct-delay-time=n**
+**acct-delay-time=0|1**
+  By default is `acct-delay-time=0`
+  
+  Specifies whether radius client should include Acct-Delay-Time attribute to accounting requests
 
 **attr-tunnel-type=name**
-
-**dae-server=x.x.x.x:port,secret**
-  By default is not defined.
+  By default is not defined. 
   
-  Specifies IP address, port to bind and secret for Dynamic Authorization Extension server (DM/CoA).This *ip address* must exist on any server interface.
+  Specifies custom attribute name to be used to send tunnel type (as string).
 
 **default-realm=realm**
   By default is disabled.
 
   Append specified realm to username. For example ``default-realm=example.com`` accel-ppp send to RADIUS server ``username@example.com``
 
-CoA
-^^^
+DM/CoA
+^^^^^^
+
+**dae-server=x.x.x.x:port,secret**
+  By default is not defined.
+  
+  Specifies IP address, port to bind and secret for Dynamic Authorization Extension server (DM/CoA).This *ip address* must exist on any server interface.
+
+**require-nas-identification=0|1**
+  By default is not defined.
+  
+  Allow processing (DM/CoA) packets that contain valid "NAS-Identifier" and "NAS-IP-Address" attributes.
