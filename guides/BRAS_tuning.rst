@@ -117,7 +117,7 @@ SYSTEMD-UDEV optimizations
 
     rm /lib/systemd/network/99-default.link
 
-2. Change ``/udev/rules.d/99-systemd.rules``
+2. Change ``/lib/udev/rules.d/99-systemd.rules``
 
 .. code-block:: sh
 
