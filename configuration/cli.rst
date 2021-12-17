@@ -63,4 +63,5 @@ Configuration overview of the command line interface.
   * ``rx-pkts`` - received packets
   * ``tx-pkts`` - transmitted packets
   * ``netns`` - network namespace name
+  * ``vrf`` - Virtual Routing and Aorwarding 
   * ``ipoe-type`` - IPoE session type (UP/DHCP)
