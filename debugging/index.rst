@@ -7,7 +7,7 @@ Sometimes for debugging need to build accel-ppp with additional flags:
 
 **-DCMAKE_BUILD_TYPE=Debug** - Include debug information to accel-pppd binary
 
-**-DCMAKE_C_FLAGS='-g -O0'** - Enable optimization flags
+**-DCMAKE_C_FLAGS="-g -O0"** - Enable optimization flags
 
 **-DMEMDEBUG=TRUE** - Set this flag if you want to debug memleak
 
@@ -27,6 +27,8 @@ Edit ``/etc/sysctl.conf`` to define core dump file name and location, add
   kernel.core_pattern = /root/core-%e-%p
 
 And apply ``sysctl -p``
+
+If accel-ppp runs as systemd service to allow create coredumps it is necessary to add ``DefaultLimitCORE=infinity`` to ``/etc/systemd/system.conf`` and run ``systemctl daemon-reexec`` to activate new params.
 
 Recommended: to create a self-checking program with predefined mistake. Create ``test.c`` with the following content
 
