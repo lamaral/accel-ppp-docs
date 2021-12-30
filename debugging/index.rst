@@ -5,11 +5,11 @@ Debugging
 
 Sometimes for debugging need to build accel-ppp with additional flags:
 
-**-DCMAKE_BUILD_TYPE=Debug** - Include debug information to accel-pppd binary
+``-DCMAKE_BUILD_TYPE=Debug`` - Include debug information to accel-pppd binary
 
-**-DCMAKE_C_FLAGS="-g -O0"** - Enable optimization flags
+``-DCMAKE_C_FLAGS='-g -O0'`` - Enable optimization flags
 
-**-DMEMDEBUG=TRUE** - Set this flag if you want to debug memleak
+``-DMEMDEBUG=TRUE`` - Set this flag if you want to debug memleak
 
 Allow create core dump files without size limiting, edit /etc/security/limits.conf and add
 
