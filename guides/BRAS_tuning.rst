@@ -18,7 +18,7 @@ Edit file ``/etc/default/grub``
 
 Additional GRUB CMD arguments:
 
-  * ixgbe.allow_unsupportd_sfp=1 - Allow to use not original Intel SFP+ modules
+  * ixgbe.allow_unsupported_sfp=1 - Allow to use not original Intel SFP+ modules
   * pcie_aspm=off - Disable Active-State Power Management
 
 After saving, please update grub settings 
@@ -33,6 +33,7 @@ Warning! Enabling the idle loop  (``idle=poll``) parameter can cause 100% CPU ut
 Disable NIC offloads
 ^^^^^^^^^^^^^^^^^^^^
 Disable hardware offloads,increase Tx/Rx buffers and queue length on your NICs to prevent speed problems.
+Please note, that GSO offload changed to tx-gso-partial in Linux kernels 4.15 and later.
 
 Debian ``/etc/network/interfaces``:
 
@@ -42,6 +43,7 @@ Debian ``/etc/network/interfaces``:
     allow-hotplug eth0
     iface eth0 inet manual
         up ethtool -K eth0 tso off gso off gro off rxvlan off txvlan off rx-vlan-filter off ntuple on &> /dev/null
+        up ethtool -K eth0 tx-gso-partial off &> /dev/null
         up ethtool -G eth0 rx 4096 tx 4096 &> /dev/null
         up ip link set eth0 txqueuelen 10000 &> /dev/null
 
