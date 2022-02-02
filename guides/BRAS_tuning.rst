@@ -110,6 +110,8 @@ To generate hotplug events on IPoE interfaces (Debian 10):
 
 just add ``|ipoe*`` after ``|ipsec*``
 
+repeat with file ``/lib/udev/net.agent``
+
 SYSTEMD-UDEV optimizations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
