@@ -363,6 +363,10 @@ Section IPoE contain many flexible customization.
     ``1`` -  proxy-arp enabled. Accel send arp-reply if src ip and dst ip on different interfaces (as well as linux proxy_arp).
 
     ``2`` -  proxy-arp enabled. Accel send arp-reply back to the same interface (as well as linux proxy_arp_pvlan).
+
+.. admonition:: Note:	
+	
+	Work only for subnets in local-net=
     
 **ip-unnumbered=0|1**
     By default is enabled: ``ip-unnumbered=1``
