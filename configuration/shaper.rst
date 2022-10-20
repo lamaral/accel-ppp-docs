@@ -135,7 +135,21 @@ Examples
 --------
 
 Fiter-Id
-^^^^^^^^
+--------
+**Time range confguration**
+Time range knob sets time range **when** limits should be activated.
+To limit user speed from 15:00 to 15-30 place 
+```
+[shaper]
+time-range=1,15:00-15:30
+```
+RADIUS should return Filter with Range ID (here number 1) bounded to particular time range:
+```
+Filter-Id = "1,124000/90874"
+```
+This will apply shaper for a specific amount of time.
+
+To
 
 Cisco AVPair
 ^^^^^^^^^^^^^^
