@@ -120,36 +120,45 @@ Example for Mikrotik:
 
   Due to accel-ppp operates with rates in kilobit basis if you send rates in different basis then you can use this option to bring your values to kilobits. For ``vendor=Mikrotik`` often sets ``rate-multiplier=0.001``
  
-**time-range=range_id,time_start-time_end**
-  By default is not defined.
-
-  Specifies time ranges for automatic rate reconfiguration. You can specify multiple such options. Look examples below.
-  
 **rate-limit=downstream/upstream**
   By default is not defined.
 
   Specifies default speed if there are no radius attributes.
+
+**time-range=range_id,time_start-time_end**
+  By default is not defined.
+
+  Specifies time ranges for automatic rate reconfiguration. You can specify multiple such options.
   
+  Configuration example:
+
+.. code-block:: none
+ 
+  [shaper]
+  time-range=1,1:00-3:00
+  time-range=2,3:00-5:00
+  time-range=3,5:00-7:00
+
+The first number is time range identifier. To define a specific rates uses following format of radius attributes: range-id,rate, range-id,down-rate/up-rate or cisco-like.
+
+As an example:
+
+.. code-block:: none
+
+  Filter-Id=1000
+  Filter-Id=1,2000
+  Filter-Id=2,3000
+  Filter-Id=3,4000
+
+That means: set 1000Kbit by default, set 2000Kbit in time range 1, set 3000Kbit in time range 2 and set 4000Kbit in time range 3.
+You have to pass multiple Filter-Id attributes to utilize this functionality.
+
 
 Examples
 --------
 
 Fiter-Id
 --------
-**Time range confguration**
-Time range knob sets time range **when** limits should be activated.
-To limit user speed from 15:00 to 15-30 place 
-```
-[shaper]
-time-range=1,15:00-15:30
-```
-RADIUS should return Filter with Range ID (here number 1) bounded to particular time range:
-```
-Filter-Id = "1,124000/90874"
-```
-This will apply shaper for a specific amount of time.
-
-To
 
 Cisco AVPair
 ^^^^^^^^^^^^^^
