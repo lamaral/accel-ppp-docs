@@ -12,7 +12,7 @@ Contains common params for all connection types
 **sid-case=upper|lower**
   By default is ``sid-case=lower``
 
-  Specifies in which case generate session identifier.
+  Specifies in which case generate session identifier (attribute ``Acct-Session-Id``).
 
 **sid-source=urandom|seq**
   By default ``sid-source=urandom``
