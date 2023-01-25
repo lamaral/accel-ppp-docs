@@ -366,7 +366,7 @@ Section IPoE contain many flexible customization.
 
 .. admonition:: Note:
     
-  Works only for subnets defined in `inlocal-net` param
+  Works only for subnets defined in `local-net` param
     
 **ip-unnumbered=0|1**
     By default is enabled: ``ip-unnumbered=1``
