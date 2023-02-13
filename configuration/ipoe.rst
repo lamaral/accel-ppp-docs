@@ -139,15 +139,19 @@ Section IPoE contain many flexible customization.
 **vlan-name=pattern**
     By default ``vlan-name=%I.%N``
     
-    Specifies pattern of vlan interface name. Pattern may contain following macros:
+    The vlan-name parameter allows you to specify the pattern for the VLAN interface name.
+
+    The pattern may include the following macros:
+
+    ``%I``: Represents the name of the parent interface (e.g. ethX, enoX, enpXsY, etc.).
     
-        ``%I`` - parent interface name (ethX, enoX, enpXsY, etc).
+    ``%N``: Represents the number of the VLAN (the latest tag ID). In the case of Q-in-Q, this refers to the C-VLAN.
+    
+    ``%P``: Represents the number of the VLAN for the parent interface. In the case of Q-in-Q, this refers to the S-VLAN.
+    
+    For example, if the parent interface name is eth0 and the VLAN number is 10, the VLAN interface name would be eth0.10 based on the default pattern %I.%N.
         
-        ``%N`` - vlan number (the latest tag id), in case of Q-in-Q that means C-VLAN.
-        
-        ``%P`` - vlan number of parent interface, in case of Q-in-Q that means S-VLAN.
-        
-    Works with params interface and required regular expression.
+    Works with interface params and required regular expression.
   
 **noauth=0|1**
     By default is disabled: ``noauth=0`` and used RADIUS or chap-secrets authentication.
