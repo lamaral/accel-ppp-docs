@@ -143,9 +143,9 @@ Section IPoE contain many flexible customization.
     
         ``%I`` - parent interface name (ethX, enoX, enpXsY, etc).
         
-        ``%N`` - number of vlan (the latest tag id), in case Q-in-Q that means C-VLAN.
+        ``%N`` - vlan number (the latest tag id), in case of Q-in-Q that means C-VLAN.
         
-        ``%P`` - number of vlan of parent interface, in case Q-in-Q that means S-VLAN.
+        ``%P`` - vlan number of parent interface, in case of Q-in-Q that means S-VLAN.
         
     Works with params interface and required regular expression.
   
