@@ -27,3 +27,8 @@ Overview ipv6 DHCP section.
   By default ``server-id=0:0:0:1``
 
   Specifies the DHCPv6 server-id. Each value a, b, c, d is hex value in range 0000 to ffff
+
+**aftr-gw=name**
+  By default is not defined.
+
+  Specifies the AFTR-Name option value to be returned on DHCPv6 replies upon request from the client. 
